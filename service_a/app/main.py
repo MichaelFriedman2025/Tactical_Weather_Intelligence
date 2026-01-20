@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 import uvicorn
+import routes
 
 
 app = FastAPI()
+
+app.include_router(routes.router,prefix="/ingest",tags=["Ingest"])
 
 
 if __name__ == "__main__":

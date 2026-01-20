@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 
+
 def fetch_coordinates(location_name: str):
     url = "https://geocoding-api.open-meteo.com/v1/search"
     params = {
@@ -26,7 +27,7 @@ def fetch_coordinates(location_name: str):
     }
 
 
-# --------- Helper: Weather ----------
+
 def fetch_hourly_weather(latitude: float, longitude: float):
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
@@ -42,15 +43,12 @@ def fetch_hourly_weather(latitude: float, longitude: float):
     return response.json()["hourly"]
 
 
-# --------- Main Ingestion Logic ----------
+
 def ingest_weather_for_location(location_name):
     records = []
 
-
-    # 1. Get coordinates
     location = fetch_coordinates(location_name)
 
-    # 2. Get weather data
     hourly_data = fetch_hourly_weather(
         location["latitude"],
         location["longitude"]
@@ -61,7 +59,6 @@ def ingest_weather_for_location(location_name):
     wind_speeds = hourly_data["wind_speed_10m"]
     humidities = hourly_data["relative_humidity_2m"]
 
-    # 3. Flatten to records (ONE record per hour per location)
     for i in range(len(times)):
         record = {
             "timestamp": datetime.fromisoformat(times[i]),
@@ -78,6 +75,8 @@ def ingest_weather_for_location(location_name):
 
     return records
 
-# this triggers the whole pipeline to ingest weather for London and write to mysql
-data = ingest_weather_for_location("London")
-print(data)
+def resolve_city_and_send(location_name):
+    coordinates = fetch_coordinates(location_name)
+    fetch_hourly_weather(coordinates["latitude"], coordinates["longitude"])
+    data = ingest_weather_for_location(location_name)
+    return data
