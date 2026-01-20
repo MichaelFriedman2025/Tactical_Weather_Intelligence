@@ -80,3 +80,14 @@ def resolve_city_and_send(location_name):
     fetch_hourly_weather(coordinates["latitude"], coordinates["longitude"])
     data = ingest_weather_for_location(location_name)
     return data
+
+class SendData:
+    host = "localhost:8000"
+
+    @staticmethod
+    def send_to_service_b(data):
+        try:
+            requests.post(SendData.host, data)
+            return True
+        except:
+            return False

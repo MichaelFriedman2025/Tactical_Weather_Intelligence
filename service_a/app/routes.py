@@ -7,7 +7,7 @@ router = APIRouter()
 def data_ingest(location_name: str):
     try:
         data = resolve_city_and_send(location_name)
-        return { "The data": data }
+        return {"The data": data }
     except:
 
         raise HTTPException(status_code=400, detail="the load data faild")
