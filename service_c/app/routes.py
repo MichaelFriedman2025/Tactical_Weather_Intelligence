@@ -19,18 +19,23 @@ def get_records(time_or_location:str):
         return TimeAndArea.get_record_by_location()
 
 @router.get("/records/count")
-def return_the_number_of_records_by_region():
-    pass
+def get_the_number_of_most_info_on_country():
+    return MostGroup.most_search()
 
 @router.get("/records/avg-temperature")
-def a():
-    pass
+def get_avg_temp():
+    return AVGTemperature.avg_temp()
 
 @router.get("/records/max-wind")
-def a():
-    pass
+def get_max_wind():
+    return MAXWind.max_wind()
 
 @router.get("/records/extreme")
-def a():
-    pass
+def get_most_dangerous_operations():
+    return Extreame.dangerous_operations()
 
+
+a = "2026/12"
+b = a.split("/")
+for i in b:
+    print(i.isdigit())

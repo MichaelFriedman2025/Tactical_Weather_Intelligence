@@ -43,10 +43,34 @@ class MostGroup():
     @staticmethod
     def most_search(location,connection:MySQLConnectionAbstract):
         cursor = connection.cursor()
-        sql = ""
+        sql = "SELECT COUNT(*) FROM records_weather GROUP BY location_name"
+        cursor.execute(sql, (location,))
+        result = cursor.fetchall()
+        return result
+    
+class AVGTemperature():
+    
+    @classmethod
+    def avg_temp(temperature,connection:MySQLConnectionAbstract):
+        cursor = connection.cursor()
+        sql = "SELECT AVG(temperature), location_name FROM records_weather GROUP BY location_name"
+        cursor.execute(sql, (temperature,))
+        result = cursor.fetchall()
+        return result
 
+class  MAXWind():
 
-data = [{'timestamp': '2026-01-27T23:00:00', 'location_name': 'Tel Aviv', 'country': 'Israel', 'latitude': 32.08088, 'longitude': 34.78057, 'temperature': 17.4, 'wind_speed': 19.4, 'humidity': 56, 'temperature_category': 'cold', 'wind_status': 'windy'},{'timestamp': '2026-01-27T23:00:00', 'location_name': 'Tel Aviv', 'country': 'Israel', 'latitude': 32.08088, 'longitude': 34.78057, 'temperature': 17.4, 'wind_speed': 19.4, 'humidity': 56, 'temperature_category': 'cold', 'wind_status': 'windy'}]
-from db import get_connection
-conn  = get_connection()
-insert_to_db(data,conn)
+    @staticmethod
+    def max_wind(wind_speed,connection:MySQLConnectionAbstract):
+        cursor = connection.cursor()
+        sql = "SELECT MAX(wind_speed), location_name FROM records_weather GROUP BY location_name"
+        cursor.execute(sql, (wind_speed,))
+        result = cursor.fetchall()
+        return result
+
+    
+class Extreame():
+
+    @staticmethod
+    def dangerous_operations():
+        pass
