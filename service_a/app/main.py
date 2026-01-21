@@ -5,8 +5,8 @@ import routes
 
 app = FastAPI()
 
-app.include_router(routes.router,prefix="/ingest",tags=["Ingest"])
+app.include_router(routes.router)
 
 
 if __name__ == "__main__":
-    uvicorn.run(app,host="localhost",port=8080)
+    uvicorn.run("main:app",port=8080,host="localhost" ,reload=True)
