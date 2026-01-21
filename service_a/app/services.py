@@ -60,7 +60,7 @@ def ingest_weather_for_location(location_name):
 
     for i in range(len(times)):
         record = {
-            "timestamp": str(datetime.fromisoformat(times[i])),
+            "timestamp": datetime.fromisoformat(times[i]).isoformat(),
             "location_name": location["location_name"],
             "country": location["country"],
             "latitude": location["latitude"],
