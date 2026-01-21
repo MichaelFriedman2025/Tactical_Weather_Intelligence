@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service-a
+  labels:
+    app: api-service-a
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-service-a
+  template:
+    metadata:
+      labels:
+        app: api-service-a
+    spec:
+      containers:
+      - name: api-service-a
+        image: michaelfriedman1/service_a:1.1
+        ports:
+        - containerPort: 8080

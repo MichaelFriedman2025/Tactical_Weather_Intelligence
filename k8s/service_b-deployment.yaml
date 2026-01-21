@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service-b
+  labels:
+    app: api-service-b
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-service-b
+  template:
+    metadata:
+      labels:
+        app: api-service-b
+    spec:
+      containers:
+      - name: api-service-b
+        image: michaelfriedman1/service_b:1.1
+        ports:
+        - containerPort: 8000
