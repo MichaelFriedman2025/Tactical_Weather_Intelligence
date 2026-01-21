@@ -32,9 +32,3 @@ def a():
 def a():
     pass
 
-
-
-a = "2026/12"
-b = a.split("/")
-for i in b:
-    print(i.isdigit())
