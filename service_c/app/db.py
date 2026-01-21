@@ -5,15 +5,14 @@ from mysql.connector.connection import MySQLConnectionAbstract
 def get_connection():
     mydb = mysql.connector.connect(
     host="localhost",
-    user="root")
+    user="root",
+    database="mydatabase")
     return mydb
 
-def creat_database_and_table(mydb:MySQLConnectionAbstract):
+def creat_table(mydb:MySQLConnectionAbstract):
     mycursor = mydb.cursor()
-    mycursor.execute("CREATE DATABASE mydatabase")
-    mycursor.execute("USE mydatabase;")
     mycursor.execute("""
-    CREATE TABLE records_weather (
+    CREATE TABLE IF NOT EXIST records_weather (
                     id INT PRIMARY KEY AUTO_INCREMENT,
                     timestamp DATETIME, 
                     location_name VARCHAR(100),
