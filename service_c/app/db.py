@@ -24,3 +24,5 @@ def creat_table(mydb:MySQLConnectionAbstract):
                     humidity INT ,
                     temperature_category VARCHAR(100), 
                     wind_category VARCHAR(100))""")
+
+

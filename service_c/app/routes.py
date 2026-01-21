@@ -1,13 +1,15 @@
 from fastapi import APIRouter
 from models import *
-
+from schemas import Records
+from db import get_connection
 
 router = APIRouter()
 
 @router.post("/records")
-def post_records():
-    pass
-
+def post_records(record:Records):
+    conn = get_connection()
+    insert_to_db(record.record,conn)
+    return {"hi":"hi from service c"}
 
 @router.get("/records")
 def get_records(time_or_location:str):
