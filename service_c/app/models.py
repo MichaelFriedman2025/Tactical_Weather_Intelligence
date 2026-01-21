@@ -28,4 +28,34 @@ class MostGroup():
     @staticmethod
     def most_search(location,connection:MySQLConnectionAbstract):
         cursor = connection.cursor()
-        sql = ""
+        sql = "SELECT COUNT(*) FROM records_weather GROUP BY location_name"
+        cursor.execute(sql, (location,))
+        result = cursor.fetchall()
+        return result
+    
+class AVGTemperature():
+    
+    @classmethod
+    def avg_temp(temperature,connection:MySQLConnectionAbstract):
+        cursor = connection.cursor()
+        sql = "SELECT AVG(temperature), location_name FROM records_weather GROUP BY location_name"
+        cursor.execute(sql, (temperature,))
+        result = cursor.fetchall()
+        return result
+
+class  MAXWind():
+
+    @staticmethod
+    def max_wind(wind_speed,connection:MySQLConnectionAbstract):
+        cursor = connection.cursor()
+        sql = "SELECT MAX(wind_speed), location_name FROM records_weather GROUP BY location_name"
+        cursor.execute(sql, (wind_speed,))
+        result = cursor.fetchall()
+        return result
+
+    
+class Extreame():
+
+    @staticmethod
+    def dangerous_operations():
+        pass
